@@ -326,9 +326,9 @@ async def help(ctx):
     embed.add_field(name='6',value="`.quotes`: Use this command to generate a lyrical quote (used as `.quote`)\n", inline= False)
     embed.add_field(name='7',value="`.invite`: Use this command to get the link to invite this bot to your server (used as `.invite`)\n", inline= False)
     embed.add_field(name='8',value="`.ping`: Use this command to check the host server's latency (used as `.ping`)\n", inline= False)
-    embed.add_field(name ='9',value="`.imemes` : Use this command to get desimemes.)\n",inline = False)
-    embed.add_field(name='10',value="`.progmemes` : Use this command to get memes related to programming.\n", inline= False)
-    embed.add_field(name='11',value="`.upmusic` : Use this command to get the latest trends going on in the music industry.\n", inline= False)
+    embed.add_field(name ='9',value="`.imemes` : Use this command to get desimemes (used as `.imemes`). \n",inline = False)
+    embed.add_field(name='10',value="`.progmemes` : Use this command to get memes related to programming(used as `.progmemes`).\n", inline= False)
+    embed.add_field(name='11',value="`.upmusic` : Use this command to get the latest trends going on in the music industry(used as `.upmusic`).\n", inline= False)
     await ctx.channel.send(embed=embed)
 
 #memes
