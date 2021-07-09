@@ -49,7 +49,7 @@ async def spt(ctx, user: discord.Member = None):
         if isinstance(activity,discord.Spotify):
             spotify_result = activity
         else:
-            await ctx.channel.send(f'{user.name} is not playing any songs on Spotify or the discord status has been set invisible.')
+            await ctx.channel.send(f'{user.name} is not playing any songs on Spotify or the discord status has been set to invisible (or has a custom status).')
       
     if spotify_result!= None:
       
