@@ -10,12 +10,12 @@ import os
 from discord.ext import commands
 from discord import Color
 from discord.ext.commands import Bot, bot
-
+import praw
 intents = discord.Intents.all()
 
 token = os.environ.get("TOKEN")                       #add Discord Bot token
-
-api = genius.Genius('aKDMKgolc1ZSD_DDH-QjK2YyRymM1_Jc2jFdAkThZLmCAwg0mMYhfdnsbnOrD_Nu')   #add genius token
+g_token = os.environ.get("GENIUS_TOKEN")
+api = genius.Genius(g_token)   #add genius token
 
 client = commands.Bot(command_prefix = '.',intents=intents)  #assigning command prefix
 client.remove_command("help")
@@ -327,9 +327,92 @@ async def help(ctx):
     embed.add_field(name='6',value="`.quotes`: Use this command to generate a lyrical quote (used as `.quote`)\n", inline= False)
     embed.add_field(name='7',value="`.invite`: Use this command to get the link to invite this bot to your server (used as `.invite`)\n", inline= False)
     embed.add_field(name='8',value="`.ping`: Use this command to check the host server's latency (used as `.ping`)\n", inline= False)
-
+    embed.add_field(name ='9',value="`.imemes` : Use this command to get desimemes.)\n",inline = False)
+    embed.add_field(name='10',value="`.progmemes` : Use this command to get memes related to programming.\n", inline= False)
+    embed.add_field(name='11',value="`.upmusic` : Use this command to get the latest trends going on in the music industry.\n", inline= False)
     await ctx.channel.send(embed=embed)
 
+#memes
+reddit=praw.Reddit(client_id='66q44f4e7k-W9g',
+                    client_secret='78Xzv77rYyxq2Nd4vGXhbZ2JCtmQBg',
+                    user_agent="trial"
+)
 
+@client.command()
+async def imemes(ctx):
+    meme_choices=["IndianDankMemes","dankinindia","IndianMeyMeys"]
+    x=random.choice(meme_choices)
+    subreddit= reddit.subreddit(x)
+    top=subreddit.hot(limit=50)
+    all_subs=[]
+
+    for submission in top:
+        all_subs.append(submission)
+    random_sub=random.choice(all_subs)
+    name=random_sub.title
+    
+    embed = discord.Embed(title=name, url=random_sub.url,
+                           color=discord.Color.random(),
+                           )
+    embed.set_image(url=random_sub.url)
+    await ctx.send(embed=embed)
+
+
+@client.command()
+async def progmemes(ctx):
+    meme_choices=["ProgrammerHumor","programmingmemes"]
+    x=random.choice(meme_choices)
+    subreddit= reddit.subreddit(x)
+    top=subreddit.hot(limit=50)
+    all_subs=[]
+
+    for submission in top:
+        all_subs.append(submission)
+    random_sub=random.choice(all_subs)
+    name=random_sub.title
+    
+    embed = discord.Embed(title=name, url=random_sub.url,
+                           color=discord.Color.random(),
+                           )
+    embed.set_image(url=random_sub.url)
+    await ctx.send(embed=embed)
+
+@client.command()
+async def bnews(ctx):
+    meme_choices=["Entrepreneur", "startups"]
+    x=random.choice(meme_choices)
+    subreddit= reddit.subreddit(x)
+    top=subreddit.hot(limit=50)
+    all_subs=[]
+
+    for submission in top:
+        all_subs.append(submission)
+    random_sub=random.choice(all_subs)
+    name=random_sub.title
+    
+    embed = discord.Embed(title=name, url=random_sub.url,
+                           color=discord.Color.random(),
+                           )
+    #embed.set_image(url=random_sub.url)
+    await ctx.send(embed=embed)
+
+@client.command()
+async def upmusic(ctx):
+    meme_choices=["Music","jazznoir"]
+    x=random.choice(meme_choices)
+    subreddit= reddit.subreddit(x)
+    top=subreddit.hot(limit=50)
+    all_subs=[]
+
+    for submission in top:
+        all_subs.append(submission)
+    random_sub=random.choice(all_subs)
+    name=random_sub.title
+    
+    embed = discord.Embed(title=name, url=random_sub.url,
+                           color=discord.Color.random(),
+                           )
+   
+    await ctx.send(embed=embed)
 
 client.run(token)
