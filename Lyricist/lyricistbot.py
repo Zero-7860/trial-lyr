@@ -12,10 +12,10 @@ from discord import Color
 from discord.ext.commands import Bot, bot
 
 intents = discord.Intents.all()
-api = genius.Genius(os.environ.get("GENIUS_TOKEN"))   #add genius token
+
 token = os.environ.get("TOKEN")                       #add Discord Bot token
-
-
+g_token = os.environ.get("GENIUS_TOKEN")
+api = genius.Genius(g_token)   #add genius token
 
 client = commands.Bot(command_prefix = '.',intents=intents)  #assigning command prefix
 client.remove_command("help")
